@@ -32,6 +32,23 @@ app.get('/', (req, res) => {
     res.send('Hello from simple JWT Server')
 });
 
+app.post('/login', (req, res) => {
+    const user = req.body;
+    console.log(user)
+    //---custom authentic 
+    // DANGER: Do not check password here for serious application
+    // USE proper process for hashing and checking
+    // After completing all authentication related verification, issue JWT token
+    if (user.password === '123456') {
+
+    }
+    else {
+
+    }
+    res.send({ success: true });
+})
+
+
 /* 
 app.post('/login', (req, res) =>{
     const user = req.body;
