@@ -13,6 +13,12 @@ app.use(express.json());
 
 const verifyJWT = (req, res, next) => {
     const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        return res.status(401).send({ message: 'unauthorized' })
+    }
+    const token = authHeader.split(' ')[1];
+
+
     console.log('inside verify Token', authHeader)
 
 }
@@ -84,18 +90,14 @@ app.post('/login', (req, res) =>{
     }
 })
  */
+// verifyJWT medial wair
+app.get('/orders', verifyJWT, (req, res) => {
+    // console.log(req.headers.authorization);
 
-app.get('/orders', (req, res) => {
-    console.log(req.headers.authorization);
     res.send([{ id: 1, item: 'sunglass' }, { id: 2, item: 'moonglass' }])
 });
 
 
-/* 
-app.get('/orders', verifyJWT, (req, res) =>{
-    res.send([{id: 1, item: 'sunglass'}, {id: 2, item: 'moonglass'}])
-});
- */
 
 app.listen(port, () => {
     console.log('Listening to port', port);
