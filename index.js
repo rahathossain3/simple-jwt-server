@@ -11,6 +11,12 @@ app.use(cors());
 app.use(express.json());
 
 
+const verifyJWT = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    console.log('inside verify Token', authHeader)
+
+}
+
 /* 
 const verifyJWT = (req, res, next) =>{
     const authHeader = req.headers.authorization;
@@ -80,6 +86,7 @@ app.post('/login', (req, res) =>{
  */
 
 app.get('/orders', (req, res) => {
+    console.log(req.headers.authorization);
     res.send([{ id: 1, item: 'sunglass' }, { id: 2, item: 'moonglass' }])
 });
 
